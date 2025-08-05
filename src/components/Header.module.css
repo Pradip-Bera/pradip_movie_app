@@ -1,0 +1,44 @@
+      .usericonresponsive {
+          width: 18px;
+          height: 18px;
+        }
+
+         @media (min-width: 330px) {
+          .usericonresponsive {
+            margin-top: -15px;
+            margin-right: 3px;
+          }
+        }
+        
+        @media (min-width: 360px) {
+          .usericonresponsive {
+            width: 17px;
+            height: 17px;
+            margin-top: -15px;
+            margin-right: 3px;
+          }
+        }
+        
+        @media (min-width: 480px) {
+          .usericonresponsive {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        
+        @media (min-width: 640px) {
+          .usericonresponsive {
+            width: 28px;
+            height: 28px;
+          }
+        }
+        
+        @media (min-width: 768px) {
+          .usericonresponsive {
+            width: 32px;
+            height: 32px;
+          }
+        }
+
+
+
