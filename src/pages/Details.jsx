@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import useFetchdetails from "../hooks/usefetchdetails";
@@ -12,6 +12,10 @@ const Details = () => {
   const params = useParams();
   const imgUrl = useSelector((state) => state.movieData.imgUrl);
   const { data } = useFetchdetails(`/${params?.explore}/${params?.id}`);
+  const { data: picdata } = useFetchdetails(
+    `/${params?.explore}/${params?.id}/images`
+  );
+  console.log("data", picdata?.backdrops[0]?.file_path);
   const { data: castData } = useFetchdetails(
     `/${params?.explore}/${params?.id}/credits`
   );
@@ -37,6 +41,9 @@ const Details = () => {
     setplayvideoid(data);
     setplayvideo(true);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [params.id]);
 
   return (
     <div>
@@ -139,6 +146,25 @@ const Details = () => {
         </div>
       </div>
       <div>
+        <Divider />
+        <h2 className="text-white text-2xl font-bold mb-2 ml-20">
+          Screen-Shots :
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 m-20 mt-13">
+          {picdata?.backdrops
+            ?.sort(() => 0.5 - Math.random()) // Shuffle array
+            ?.slice(0, 6) // Pick first 6 randomly
+            ?.map((shot, idx) => (
+              <img
+                key={idx}
+                src={imgUrl + shot.file_path}
+                alt={`Screenshot ${idx + 1}`}
+                className="w-full h-[180px] object-cover rounded"
+              />
+            ))}
+        </div>
+
         <HorizontalScollCard
           data={similardata}
           heading={"Similar " + params?.explore}
